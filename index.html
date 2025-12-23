@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Translator v3</title>
+
+    <style>
+        body {
+            background: linear-gradient(to right, #74ebd5, #9face6);
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 70%;
+            margin: 50px auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            font-size: 16px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 12px 35px;
+            font-size: 18px;
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1a252f;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>English to Arabic Translator</h2>
+
+    <textarea id="englishText" rows="6"
+        placeholder="Enter English text (max 150 words)"></textarea>
+
+    <button onclick="translateText()">Translate</button>
+
+    <textarea id="arabicText" rows="6"
+        placeholder="Arabic translation"></textarea>
+</div>
+
+<script>
+function translateText() {
+    let text = document.getElementById("englishText").value.trim();
+
+    if (text === "") {
+        alert("Please enter some text.");
+        return;
+    }
+
+    let wordCount = text.split(/\s+/).length;
+    if (wordCount > 150) {
+        alert("Please enter no more than 150 words.");
+        return;
+    }
+
+    let dictionary = {
+        // greetings
+        "hello": "مرحبا",
+        "hi": "اهلا",
+        "welcome": "اهلا وسهلا",
+
+        // people & jobs
+        "student": "طالب",
+        "teacher": "معلم",
+        "engineer": "مهندس",
+        "doctor": "طبيب",
+        "worker": "عامل",
+        "manager": "مدير",
+
+        // education
+        "school": "مدرسة",
+        "university": "جامعة",
+        "education": "التعليم",
+        "study": "يدرس",
+        "learn": "يتعلم",
+        "book": "كتاب",
+        "lesson": "درس",
+        "exam": "امتحان",
+
+        // technology
+        "computer": "حاسوب",
+        "technology": "التكنولوجيا",
+        "programming": "برمجة",
+        "software": "برمجيات",
+        "hardware": "عتاد",
+        "internet": "انترنت",
+        "website": "موقع",
+        "code": "كود",
+
+        // general words
+        "world": "العالم",
+        "good": "جيد",
+        "bad": "سيئ",
+        "new": "جديد",
+        "old": "قديم",
+        "big": "كبير",
+        "small": "صغير",
+        "fast": "سريع",
+        "slow": "بطيء",
+
+        // actions
+        "work": "يعمل",
+        "job": "وظيفة",
+        "play": "يلعب",
+        "read": "يقرأ",
+        "write": "يكتب",
+        "love": "يحب",
+        "eat": "يأكل",
+        "drink": "يشرب",
+
+        // time & place
+        "home": "منزل",
+        "city": "مدينة",
+        "country": "دولة",
+        "morning": "صباح",
+        "evening": "مساء",
+        "night": "ليل",
+        "day": "يوم"
+    };
+
+    let words = text.split(/\s+/);
+    let translated = words.map(word => {
+        let clean = word.toLowerCase();
+        return dictionary[clean] || word;
+    });
+
+    document.getElementById("arabicText").value = translated.join(" ");
+}
+</script>
+
+</body>
+</html>
